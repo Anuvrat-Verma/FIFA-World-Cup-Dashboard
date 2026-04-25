@@ -1,0 +1,46 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.2.4' // Updated
+    id 'io.spring.dependency-management' version '1.1.5' // Updated
+    id 'eclipse' // <--- ADD THIS LINE
+}
+// Remove id 'eclipse' for now, it's causing the crash
+group = 'com.anuvrat'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    runtimeOnly 'org.postgresql:postgresql'
+
+    // --- LOMBOK SUPPORT ---
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testCompileOnly 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+    
+    // Spring Security
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    // JWT (JSON Web Token) - Using the popular JJWT library
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5' // or jjwt-gson if you prefer
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
