@@ -24,6 +24,9 @@ public class SecurityConfig {
 	        .cors(Customizer.withDefaults())
 	        .csrf(csrf -> csrf.disable())
 	        .authorizeHttpRequests(auth -> auth
+	        	.requestMatchers("/api/v1/billing/webhook").permitAll() // IMPORTANT: Stripe can't login!
+	            .requestMatchers("/api/v1/billing/checkout").authenticated()
+	            .requestMatchers("/api/v1/football/ai-sentiment").authenticated()
 	            // 1. Allow everyone to SEE the data (Matches, Standings, Scorers)
 	            .requestMatchers(HttpMethod.GET, "/api/v1/football/**").permitAll()
 	            

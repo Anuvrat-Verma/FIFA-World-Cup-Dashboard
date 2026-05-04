@@ -11,7 +11,8 @@ import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+import com.first.demo.repository.UserSubscriptionRepository;
+import com.first.demo.entity.UserSubscription;
 @RestController
 @RequestMapping("/api/v1/football")
 @CrossOrigin(origins = "http://localhost:3000")
@@ -24,6 +25,23 @@ public class FootballController {
     private SavedMatchRepository savedMatchRepository;
 
     private final FootballService footballService;
+    
+    @Autowired
+    private UserSubscriptionRepository subscriptionRepository;
+
+    @GetMapping("/ai-sentiment")
+    public ResponseEntity<?> getSentiment(@AuthenticationPrincipal Jwt jwt) {
+        String email = jwt.getClaim("email"); //[cite: 5]
+        
+        // Check database for Pro status
+        UserSubscription sub = subscriptionRepository.findById(email).orElse(null);
+        if (sub == null || !sub.isPro()) {
+            return ResponseEntity.status(403).body("Upgrade to Pro to access AI Sentiment Analysis.");
+        }
+
+        // If Pro, proceed with n8n/AI logic
+        return ResponseEntity.ok("Successful AI Analysis Data");
+    }
 
     // Constructor injection for FootballService
     public FootballController(FootballService footballService) {

@@ -39,7 +39,11 @@ dependencies {
     runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5' // or jjwt-gson if you prefer
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-}
+    
+	implementation 'com.stripe:stripe-java:24.0.0'
+    
+    // JSON library for parsing webhook payloads
+    implementation 'org.json:json:20231013'}
 
 tasks.named('test') {
 	useJUnitPlatform()
