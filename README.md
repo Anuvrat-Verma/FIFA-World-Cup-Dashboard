@@ -1,4 +1,4 @@
-# 🏆 FIFA World Cup 2022 Analytics Dashboard
+# 🏆 FIFA World Cup Analytics Dashboard
 
 A full-stack sports analytics platform providing real-time match data, group standings, and AI-driven sentiment analysis[cite: 1]. This project features a **React** frontend and a **Spring Boot** backend, integrated with **Firebase** for authentication and **Stripe** for Pro-tier subscriptions[cite: 1].
 
