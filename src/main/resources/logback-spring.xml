@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- Local Console Appender -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Google Cloud Logging Appender -->
+    <appender name="CLOUD" class="com.google.cloud.logging.logback.LoggingAppender">
+        <!-- Optional: Specify your custom GCP Log Name -->
+        <log>fifa-dashboard-logs</log> 
+        <flushLevel>WARN</flushLevel> <!-- Instantly flush warnings and errors -->
+    </appender>
+
+    <!-- Root Logger Configuration -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="CLOUD" />
+    </root>
+</configuration>
